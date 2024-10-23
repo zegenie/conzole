@@ -1,0 +1,193 @@
+[gd_scene load_steps=17 format=3 uid="uid://d2x57tvbnc28a"]
+
+[ext_resource type="Script" path="res://addons/conzole/conzole_window.gd" id="1_l1lme"]
+[ext_resource type="Texture2D" uid="uid://bcr75noya77qt" path="res://addons/conzole/icon_clear.svg" id="2_ssx8e"]
+[ext_resource type="Texture2D" uid="uid://d4iw57j4aqywc" path="res://addons/conzole/icon_error.svg" id="3_3kx34"]
+[ext_resource type="Texture2D" uid="uid://cssr0kq6i0wws" path="res://addons/conzole/icon_warning.svg" id="4_ffjnc"]
+[ext_resource type="Texture2D" uid="uid://dnff7khk44sjn" path="res://addons/conzole/icon_info.svg" id="5_kv0fu"]
+[ext_resource type="Texture2D" uid="uid://qn3y4qq2fmbo" path="res://addons/conzole/icon_notice.svg" id="5_rqlr6"]
+[ext_resource type="Texture2D" uid="uid://7tpy438jmiua" path="res://addons/conzole/icon_message.svg" id="6_ijbhy"]
+[ext_resource type="Texture2D" uid="uid://ferel1janfq6" path="res://addons/conzole/icon_debug.svg" id="6_qqlil"]
+[ext_resource type="Texture2D" uid="uid://dynpepphmvdae" path="res://addons/conzole/icon_verbose.svg" id="7_yddll"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o74mf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_alg54"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_di7f0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ycyse"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nssdj"]
+
+[sub_resource type="Theme" id="Theme_2iluv"]
+CheckButton/constants/h_separation = 7
+CheckButton/constants/icon_max_width = 22
+CheckButton/styles/focus = SubResource("StyleBoxEmpty_o74mf")
+CheckButton/styles/hover = SubResource("StyleBoxEmpty_alg54")
+CheckButton/styles/hover_pressed = SubResource("StyleBoxEmpty_di7f0")
+CheckButton/styles/normal = SubResource("StyleBoxEmpty_ycyse")
+CheckButton/styles/pressed = SubResource("StyleBoxEmpty_nssdj")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pirqe"]
+bg_color = Color(0.0445578, 0.0445579, 0.0445578, 1)
+
+[node name="ConzoleWindow" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_l1lme")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TopPanelContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ClearButton" type="Button" parent="VBoxContainer/MarginContainer/TopPanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(0.76662, 0.76662, 0.76662, 1)
+theme_override_colors/icon_pressed_color = Color(0.655601, 0.655601, 0.655601, 1)
+theme_override_colors/icon_hover_color = Color(0.775063, 0.775063, 0.775063, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/icon_max_width = 24
+icon = ExtResource("2_ssx8e")
+
+[node name="FilterInput" type="LineEdit" parent="VBoxContainer/MarginContainer/TopPanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+placeholder_text = "Filter"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/TopPanelContainer"]
+layout_mode = 2
+
+[node name="FilterMessagesError" type="CheckButton" parent="VBoxContainer/MarginContainer/TopPanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = SubResource("Theme_2iluv")
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_disabled_color = Color(0.552956, 0.552956, 0.552956, 1)
+button_pressed = true
+icon = ExtResource("3_3kx34")
+
+[node name="FilterMessagesWarning" type="CheckButton" parent="VBoxContainer/MarginContainer/TopPanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = SubResource("Theme_2iluv")
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_disabled_color = Color(0.552956, 0.552956, 0.552956, 1)
+button_pressed = true
+icon = ExtResource("4_ffjnc")
+
+[node name="FilterMessagesNotice" type="CheckButton" parent="VBoxContainer/MarginContainer/TopPanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = SubResource("Theme_2iluv")
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_disabled_color = Color(0.552956, 0.552956, 0.552956, 1)
+button_pressed = true
+icon = ExtResource("5_rqlr6")
+
+[node name="FilterMessagesInfo" type="CheckButton" parent="VBoxContainer/MarginContainer/TopPanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = SubResource("Theme_2iluv")
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_disabled_color = Color(0.552956, 0.552956, 0.552956, 1)
+button_pressed = true
+icon = ExtResource("5_kv0fu")
+
+[node name="FilterMessagesMessage" type="CheckButton" parent="VBoxContainer/MarginContainer/TopPanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = SubResource("Theme_2iluv")
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_disabled_color = Color(0.552956, 0.552956, 0.552956, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/h_separation = 2
+theme_override_constants/align_to_largest_stylebox = 1
+theme_override_constants/check_v_offset = 0
+button_pressed = true
+icon = ExtResource("6_ijbhy")
+
+[node name="FilterMessagesDebug" type="CheckButton" parent="VBoxContainer/MarginContainer/TopPanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = SubResource("Theme_2iluv")
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_disabled_color = Color(0.552956, 0.552956, 0.552956, 1)
+icon = ExtResource("6_qqlil")
+
+[node name="FilterMessagesVerbose" type="CheckButton" parent="VBoxContainer/MarginContainer/TopPanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = SubResource("Theme_2iluv")
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_disabled_color = Color(0.552956, 0.552956, 0.552956, 1)
+icon = ExtResource("7_yddll")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_pirqe")
+
+[node name="ChildrenContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

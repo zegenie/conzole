@@ -1,0 +1,95 @@
+[gd_scene load_steps=12 format=3 uid="uid://bpujcb7e1m4xp"]
+
+[ext_resource type="Script" path="res://addons/conzole/conzole_log_item.gd" id="1_g5gup"]
+[ext_resource type="FontFile" uid="uid://dmwy0u6c8aluc" path="res://addons/conzole/IBMPlexMono-Regular.ttf" id="2_vdexi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0uxq1"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="FontVariation" id="FontVariation_xjo3q"]
+base_font = ExtResource("2_vdexi")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vtwf2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ixpfv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qlema"]
+
+[sub_resource type="FontVariation" id="FontVariation_tlrps"]
+base_font = ExtResource("2_vdexi")
+variation_embolden = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vpmbt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o0bh5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dlixo"]
+
+[node name="ConzoleLogItem" type="PanelContainer"]
+offset_left = 158.0
+offset_right = 158.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_0uxq1")
+script = ExtResource("1_g5gup")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="LogLineContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="LogTimestamp" type="RichTextLabel" parent="VBoxContainer/LogLineContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(155, 22)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/default_color = Color(0.837469, 0.837469, 0.837469, 1)
+theme_override_fonts/normal_font = SubResource("FontVariation_xjo3q")
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+theme_override_font_sizes/mono_font_size = 18
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+theme_override_styles/fill = SubResource("StyleBoxEmpty_vtwf2")
+theme_override_styles/background = SubResource("StyleBoxEmpty_ixpfv")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qlema")
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="LogIcon" type="TextureRect" parent="VBoxContainer/LogLineContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+expand_mode = 1
+stretch_mode = 4
+
+[node name="LogLine" type="RichTextLabel" parent="VBoxContainer/LogLineContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_colors/default_color = Color(0.837469, 0.837469, 0.837469, 1)
+theme_override_fonts/normal_font = SubResource("FontVariation_xjo3q")
+theme_override_fonts/bold_font = SubResource("FontVariation_tlrps")
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+theme_override_font_sizes/mono_font_size = 18
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+theme_override_styles/fill = SubResource("StyleBoxEmpty_vpmbt")
+theme_override_styles/background = SubResource("StyleBoxEmpty_ixpfv")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_o0bh5")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_dlixo")
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="ChildrenContainer" type="VBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0

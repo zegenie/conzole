@@ -1,0 +1,105 @@
+[gd_scene load_steps=9 format=3 uid="uid://dwfnifhw1f3bk"]
+
+[ext_resource type="Script" path="res://addons/conzole/conzole_key_value_item.gd" id="1_rt6sd"]
+[ext_resource type="Texture2D" uid="uid://bh0pe6gyxt1tw" path="res://addons/conzole/chevron_down_square.svg" id="2_5vkbv"]
+[ext_resource type="Texture2D" uid="uid://0jl1biw1gtki" path="res://addons/conzole/icon_preview.svg" id="3_dyom2"]
+[ext_resource type="FontFile" uid="uid://dmwy0u6c8aluc" path="res://addons/conzole/IBMPlexMono-Regular.ttf" id="3_o4x84"]
+[ext_resource type="Texture2D" uid="uid://e0xp565alltc" path="res://addons/conzole/icon_delete.svg" id="4_qhhwj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6q6gk"]
+
+[sub_resource type="FontVariation" id="FontVariation_55jwo"]
+base_font = ExtResource("3_o4x84")
+
+[sub_resource type="FontVariation" id="FontVariation_o8ixg"]
+base_font = ExtResource("3_o4x84")
+
+[node name="ConzoleKeyValueItem" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_rt6sd")
+_key = ""
+
+[node name="HeaderContainer" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_6q6gk")
+
+[node name="MarginContainer" type="MarginContainer" parent="HeaderContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_right = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HeaderContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ExpandButton" type="Button" parent="HeaderContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(0.76662, 0.76662, 0.76662, 1)
+theme_override_colors/icon_pressed_color = Color(0.655601, 0.655601, 0.655601, 1)
+theme_override_colors/icon_hover_color = Color(0.775063, 0.775063, 0.775063, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/icon_max_width = 18
+icon = ExtResource("2_5vkbv")
+
+[node name="Title" type="Label" parent="HeaderContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("FontVariation_55jwo")
+theme_override_font_sizes/font_size = 18
+text = ":"
+
+[node name="Value" type="Label" parent="HeaderContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.873835, 0.877728, 0.999999, 1)
+theme_override_fonts/font = SubResource("FontVariation_o8ixg")
+theme_override_font_sizes/font_size = 18
+text = "<null>"
+
+[node name="InspectButton" type="Button" parent="HeaderContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(0.76662, 0.76662, 0.76662, 1)
+theme_override_colors/icon_pressed_color = Color(0.655601, 0.655601, 0.655601, 1)
+theme_override_colors/icon_hover_color = Color(0.775063, 0.775063, 0.775063, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/icon_max_width = 18
+icon = ExtResource("3_dyom2")
+
+[node name="RemoveButton" type="Button" parent="HeaderContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(0.76662, 0.76662, 0.76662, 1)
+theme_override_colors/icon_pressed_color = Color(0.655601, 0.655601, 0.655601, 1)
+theme_override_colors/icon_hover_color = Color(0.775063, 0.775063, 0.775063, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/icon_max_width = 18
+icon = ExtResource("4_qhhwj")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+
+[node name="ChildrenContainer" type="VBoxContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0

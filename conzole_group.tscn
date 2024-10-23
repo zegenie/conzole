@@ -1,0 +1,133 @@
+[gd_scene load_steps=19 format=3 uid="uid://cio532nthjvhn"]
+
+[ext_resource type="Script" path="res://addons/conzole/conzole_group.gd" id="1_u4kr4"]
+[ext_resource type="Texture2D" uid="uid://bh0pe6gyxt1tw" path="res://addons/conzole/chevron_down_square.svg" id="2_shaea"]
+[ext_resource type="Texture2D" uid="uid://e0xp565alltc" path="res://addons/conzole/icon_delete.svg" id="3_khrc2"]
+[ext_resource type="Texture2D" uid="uid://bcr75noya77qt" path="res://addons/conzole/icon_clear.svg" id="3_puycy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m73bh"]
+bg_color = Color(0.211765, 0.627451, 0.32549, 0.286275)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vcdr4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8i452"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1upg0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nluby"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0ejxp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dwrsx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jkok2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6imkn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y2xqt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3v6mi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_68ved"]
+
+[sub_resource type="SystemFont" id="SystemFont_nvoqp"]
+font_names = PackedStringArray("Monospace")
+font_weight = 700
+hinting = 2
+subpixel_positioning = 0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4afiv"]
+
+[node name="ConzoleGroup" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 1
+script = ExtResource("1_u4kr4")
+
+[node name="HeaderContainer" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_m73bh")
+
+[node name="MarginContainer" type="MarginContainer" parent="HeaderContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HeaderContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="ExpandButton" type="Button" parent="HeaderContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(0.76662, 0.76662, 0.76662, 1)
+theme_override_colors/icon_pressed_color = Color(0.655601, 0.655601, 0.655601, 1)
+theme_override_colors/icon_hover_color = Color(0.775063, 0.775063, 0.775063, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/icon_max_width = 18
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vcdr4")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_8i452")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_1upg0")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_nluby")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_0ejxp")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_dwrsx")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jkok2")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_6imkn")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_y2xqt")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_3v6mi")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_68ved")
+icon = ExtResource("2_shaea")
+
+[node name="Title" type="Label" parent="HeaderContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_nvoqp")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4afiv")
+
+[node name="ClearButton" type="Button" parent="HeaderContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(0.76662, 0.76662, 0.76662, 1)
+theme_override_colors/icon_pressed_color = Color(0.655601, 0.655601, 0.655601, 1)
+theme_override_colors/icon_hover_color = Color(0.775063, 0.775063, 0.775063, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/icon_max_width = 18
+icon = ExtResource("3_puycy")
+
+[node name="RemoveButton" type="Button" parent="HeaderContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(0.76662, 0.76662, 0.76662, 1)
+theme_override_colors/icon_pressed_color = Color(0.655601, 0.655601, 0.655601, 1)
+theme_override_colors/icon_hover_color = Color(0.775063, 0.775063, 0.775063, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/icon_max_width = 18
+icon = ExtResource("3_khrc2")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 8
+
+[node name="ChildrenContainer" type="VBoxContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 2
