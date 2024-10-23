@@ -1,5 +1,6 @@
 # Conzole log helper
 ![Conzole log](addons/conzole/conzole_small.png)
+
 Conzole is a web browser console-inspired logger addon designed to make it easier and more fun to utilize the Godot debugger log. The plugin lets you log messages and data from your game into a rich editor log.
 
 Features include:
