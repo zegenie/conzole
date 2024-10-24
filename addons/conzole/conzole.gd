@@ -67,6 +67,7 @@ func _log(msg, log_level: int = ConzolePlugin.LogLevel.INFO, group_key: String =
 			if _msg is ConzoleFormattedText:
 				msgs.append(_msg.get_formatted_text())
 			elif _msg is Object:
+				#EditorInterface.get_inspector().
 				msgs.append(_get_dictionary_from_object(_msg))
 			else:
 				msgs.append(_msg)
@@ -135,6 +136,9 @@ func countReset(label: String = 'default'):
 func clear():
 	EngineDebugger.send_message("conzole:clear", [])
 
+func watch(obj: Object, label: String = ''):
+	EngineDebugger.send_message("conzole:watch", [{ "_remote_object_id": obj.get_instance_id(), "_remote_object_type": obj.get_class() , "label": label }])
+
 func _self_test():
 	self.log("Test", "test group 1")
 	self.log("Test 2", "test group 2")
@@ -154,6 +158,8 @@ func _self_test():
 	self.log("Grouped message 1")
 	self.groupEnd()
 	var test_panel = PanelContainer.new()
+	self.watch(test_panel)
+	self.watch(test_panel, "My label")
 	var msg = ConzoleFormattedText.message("test").bold()
 	self.log(msg)
 	self.log([msg, test_panel])

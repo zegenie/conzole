@@ -10,50 +10,16 @@ func _has_capture(prefix):
 	# Return true if you wish to handle message with this prefix.
 	return prefix == "conzole"
 
-func select_object_in_remote_tree(node: Node, id: int):
-	if node == null:
-		return
-	if node.is_class("Tree"):
-		var root = node.get_root()
-		select_object_in_tree_items(root,  id)
-		if found:
-			return
-	for child in node.get_children():
-		select_object_in_remote_tree(child, id)
-		if found:
-			return
-
-func _uncollapse_up(item: TreeItem):
-	item.collapsed = false
-	if item.get_parent():
-		_uncollapse_up(item.get_parent())
-	
-func select_object_in_tree_items(item: TreeItem, id: int):
-	if item == null:
-		return
-	if item.get_metadata(0) == id:
-		#_uncollapse_up(item)
-		#item.get_tree().scroll_to_item(item)
-		#item.select(0)
-		found = true
-		found_item = item
-	if item.get_children():
-		for treeItem in item.get_children():
-			select_object_in_tree_items(treeItem, id)
-			if found:
-				return
-	item = item.get_next()
-	
 func _capture(message, data, session_id):
 	match message:
 		"conzole:log":
 			var _msgs = []
-			conzole_window_panel.log(data[0].msg, data[0].group_key)
+			conzole_window_panel._log(data[0].msg, data[0].log_level, data[0].group_key)
 			#if data[0].msg is Array:
 				#for msg in data[0].msg:
 					#if msg is Dictionary:
 						#if msg.has("_conzole_remote_object_id"):
-							#va
+							#
 							#var session = get_session(session_id)
 							#var node_id = msg._conzole_remote_object_id
 							#var object = instance_from_id(node_id)
@@ -72,6 +38,9 @@ func _capture(message, data, session_id):
 						#_msgs.append(msg)
 			#else:
 				#printerr("waat")
+			return true
+		"conzole:watch":
+			conzole_window_panel.watch(data[0]._remote_object_id, data[0]._remote_object_type, data[0].label)
 			return true
 		"conzole:group":
 			conzole_window_panel.group(data[0].key, data[0].options)
@@ -110,10 +79,14 @@ func _setup_session(session_id):
 	var session = get_session(session_id)
 	# Listens to the session started and stopped signals.
 	session.started.connect(_start_session)
-	session.stopped.connect(func (): print("Session stopped"))
+	session.stopped.connect(_stop_session)
 	#session.add_session_tab(conzole_window_panel)
 
 func _start_session():
 	conzole_window_panel.clear()
 	conzole_window_panel.log("Debug session started")
 	# Conzole._session = session
+
+func _stop_session():
+	conzole_window_panel.log("-------------------")
+	conzole_window_panel.log("Debug session ended")

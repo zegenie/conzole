@@ -18,14 +18,21 @@ var _expanded := false
 @export var _key: Variant = null
 @export var _value: Variant = null
 @export var _parent_item: ConzoleKeyValueItem = null
+@export var _is_watched := false
+var _remote_object_id
 
 func objectify():
 	if _value is Dictionary:
-		expand_button.visible = true
 		for dict_key in _value:
-			if ["_conzole_remote_object_id", "_conzole_remote_object_type"].has(dict_key):
-				continue
+			if dict_key is String:
+				if dict_key == "_conzole_remote_object_id":
+					_remote_object_id = _value[dict_key]
+					continue
+				
+				if ["_conzole_remote_object_type", "_conzole_remote_object_label"].has(dict_key):
+					continue
 			
+			expand_button.visible = true
 			var key_value_item = CONZOLE_KEY_VALUE_ITEM.instantiate() as ConzoleKeyValueItem
 			key_value_item._key = dict_key
 			key_value_item._value = _value[dict_key]
@@ -43,10 +50,14 @@ func objectify():
 	if (_value is String || _value is StringName) && _value == '':
 		value.text = "(Empty string)"
 	elif _value is Dictionary:
-		if _value.has("_conzole_remote_object_id"):
+		if _value.has("_conzole_remote_object_label"):
+			value.text = _value.get("_conzole_remote_object_label")
+		elif _value.has("_conzole_remote_object_type"):
 			value.text = '%s<%s>' % [str(_value.get("_conzole_remote_object_type")), str(_value.get("_conzole_remote_object_id"))]
-		else:
+		elif !_value.has("_conzole_remote_object_id"):
 			value.text = "{Dictionary}"
+		else:
+			value.text = ''
 	else:
 		value.text = str(_value)
 
@@ -58,7 +69,7 @@ func objectify():
 	else:
 		remove_button.visible = false
 	
-	if _value is Object:
+	if _remote_object_id != null:
 		inspect_button.visible = true
 		inspect_button.pressed.connect(_inspect_value)
 	else:
@@ -66,13 +77,15 @@ func objectify():
 	_update_toggle()
 
 func _ready() -> void:
-	title.text = str(_key) + ":"
+	title.text = str(_key)
+	if !_is_watched || _value.has("_conzole_remote_object_label"):
+		title.text += ":"
 	expand_button.visible = false
 	objectify()
 
 func _inspect_value():
-	var val = _value as Object
-	EditorInterface.get_inspector().object_id_selected.emit(val.get_instance_id())
+	#var val = _value as Object
+	EditorInterface.get_inspector().object_id_selected.emit(_remote_object_id)
 
 func _remove_item():
 	queue_free()

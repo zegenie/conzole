@@ -20,13 +20,17 @@ var _groups = {}
 var _active_group: ConzoleGroup
 var _parent_group: ConzoleGroup
 var _max_lines
+var _can_hide := true
 var _log_window_scene: ConzoleWindow
 
 func _ready() -> void:
 	title.text = _group_key if _group_key != 'default' else ''
 	clear_button.pressed.connect(func (): clear())
 	expand_button.pressed.connect(func (): toggle())
-	remove_button.pressed.connect(_remove_group)
+	if _can_hide:
+		remove_button.pressed.connect(_remove_group)
+	else:
+		remove_button.visible = false
 	_update_toggle()
 
 func _remove_group():
@@ -94,6 +98,9 @@ func verbose(msg, group_key: String = ''):
 func set_max_lines(value: int):
 	_max_lines = value
 
+func set_pinned():
+	remove_button.visible = false
+
 func set_color(_color: Variant):
 	if _color is String:
 		_color = Color.from_string(_color, Color.SEA_GREEN)
@@ -133,6 +140,8 @@ func group(key: String = 'default', options: Dictionary = {}, set_active := true
 	
 	if options.has("color"):
 		_group.set_color(options.color)
+	if options.has("pinned"):
+		_group.set_pinned()
 	
 	if group_keys.size() > 1:
 		return _group.group(group_keys[1], options)
@@ -155,10 +164,10 @@ func _add_log_item() -> ConzoleLogItem:
 	_log_item.filter(_log_window_scene._settings[ConzoleWindow.SETTINGS.LOG_LEVELS], _log_window_scene.filter_value)
 	return _log_item
 
-func hide_header():
+func hide_header(margins = 8):
 	header_container.visible = false
-	margin_container.add_theme_constant_override("margin_left", 8)
-	margin_container.add_theme_constant_override("margin_right", 8)
+	margin_container.add_theme_constant_override("margin_left", margins)
+	margin_container.add_theme_constant_override("margin_right", margins)
 
 func toggle():
 	_expanded = !_expanded

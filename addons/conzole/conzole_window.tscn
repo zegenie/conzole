@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d2x57tvbnc28a"]
+[gd_scene load_steps=18 format=3 uid="uid://d2x57tvbnc28a"]
 
 [ext_resource type="Script" path="res://addons/conzole/conzole_window.gd" id="1_l1lme"]
 [ext_resource type="Texture2D" uid="uid://bcr75noya77qt" path="res://addons/conzole/icon_clear.svg" id="2_ssx8e"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://7tpy438jmiua" path="res://addons/conzole/icon_message.svg" id="6_ijbhy"]
 [ext_resource type="Texture2D" uid="uid://ferel1janfq6" path="res://addons/conzole/icon_debug.svg" id="6_qqlil"]
 [ext_resource type="Texture2D" uid="uid://dynpepphmvdae" path="res://addons/conzole/icon_verbose.svg" id="7_yddll"]
+[ext_resource type="Texture2D" uid="uid://cii2lumheuytw" path="res://addons/conzole/icon_parking_lot.svg" id="10_umd3l"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o74mf"]
 
@@ -87,7 +88,7 @@ placeholder_text = "Filter"
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/TopPanelContainer"]
 layout_mode = 2
 
-[node name="FilterMessagesError" type="CheckButton" parent="VBoxContainer/MarginContainer/TopPanelContainer/HBoxContainer"]
+[node name="FilterMessagesError" type="Button" parent="VBoxContainer/MarginContainer/TopPanelContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = SubResource("Theme_2iluv")
@@ -97,10 +98,12 @@ theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_disabled_color = Color(0.552956, 0.552956, 0.552956, 1)
+theme_override_constants/icon_max_width = 18
+toggle_mode = true
 button_pressed = true
 icon = ExtResource("3_3kx34")
 
-[node name="FilterMessagesWarning" type="CheckButton" parent="VBoxContainer/MarginContainer/TopPanelContainer/HBoxContainer"]
+[node name="FilterMessagesWarning" type="Button" parent="VBoxContainer/MarginContainer/TopPanelContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = SubResource("Theme_2iluv")
@@ -110,10 +113,12 @@ theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_disabled_color = Color(0.552956, 0.552956, 0.552956, 1)
+theme_override_constants/icon_max_width = 18
+toggle_mode = true
 button_pressed = true
 icon = ExtResource("4_ffjnc")
 
-[node name="FilterMessagesNotice" type="CheckButton" parent="VBoxContainer/MarginContainer/TopPanelContainer/HBoxContainer"]
+[node name="FilterMessagesNotice" type="Button" parent="VBoxContainer/MarginContainer/TopPanelContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = SubResource("Theme_2iluv")
@@ -123,10 +128,12 @@ theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_disabled_color = Color(0.552956, 0.552956, 0.552956, 1)
+theme_override_constants/icon_max_width = 18
+toggle_mode = true
 button_pressed = true
 icon = ExtResource("5_rqlr6")
 
-[node name="FilterMessagesInfo" type="CheckButton" parent="VBoxContainer/MarginContainer/TopPanelContainer/HBoxContainer"]
+[node name="FilterMessagesInfo" type="Button" parent="VBoxContainer/MarginContainer/TopPanelContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = SubResource("Theme_2iluv")
@@ -136,10 +143,12 @@ theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_disabled_color = Color(0.552956, 0.552956, 0.552956, 1)
+theme_override_constants/icon_max_width = 18
+toggle_mode = true
 button_pressed = true
 icon = ExtResource("5_kv0fu")
 
-[node name="FilterMessagesMessage" type="CheckButton" parent="VBoxContainer/MarginContainer/TopPanelContainer/HBoxContainer"]
+[node name="FilterMessagesMessage" type="Button" parent="VBoxContainer/MarginContainer/TopPanelContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = SubResource("Theme_2iluv")
@@ -151,12 +160,13 @@ theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_disabled_color = Color(0.552956, 0.552956, 0.552956, 1)
 theme_override_constants/outline_size = 0
 theme_override_constants/h_separation = 2
+theme_override_constants/icon_max_width = 18
 theme_override_constants/align_to_largest_stylebox = 1
-theme_override_constants/check_v_offset = 0
+toggle_mode = true
 button_pressed = true
 icon = ExtResource("6_ijbhy")
 
-[node name="FilterMessagesDebug" type="CheckButton" parent="VBoxContainer/MarginContainer/TopPanelContainer/HBoxContainer"]
+[node name="FilterMessagesDebug" type="Button" parent="VBoxContainer/MarginContainer/TopPanelContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = SubResource("Theme_2iluv")
@@ -166,9 +176,11 @@ theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_disabled_color = Color(0.552956, 0.552956, 0.552956, 1)
+theme_override_constants/icon_max_width = 18
+toggle_mode = true
 icon = ExtResource("6_qqlil")
 
-[node name="FilterMessagesVerbose" type="CheckButton" parent="VBoxContainer/MarginContainer/TopPanelContainer/HBoxContainer"]
+[node name="FilterMessagesVerbose" type="Button" parent="VBoxContainer/MarginContainer/TopPanelContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = SubResource("Theme_2iluv")
@@ -178,15 +190,55 @@ theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_disabled_color = Color(0.552956, 0.552956, 0.552956, 1)
+theme_override_constants/icon_max_width = 18
+toggle_mode = true
 icon = ExtResource("7_yddll")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/MarginContainer/TopPanelContainer"]
+layout_mode = 2
+
+[node name="ParkingLotButton" type="Button" parent="VBoxContainer/MarginContainer/TopPanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(0.76662, 0.76662, 0.76662, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(0.775063, 0.775063, 0.775063, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/icon_max_width = 24
+toggle_mode = true
+button_pressed = true
+icon = ExtResource("10_umd3l")
+
+[node name="HBoxContainer" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_pirqe")
 
-[node name="ChildrenContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+[node name="ChildrenContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ParkingLotContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/ParkingLotContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pirqe")
+
+[node name="ParkingLotGroupContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ParkingLotContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3

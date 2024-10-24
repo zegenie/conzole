@@ -3,7 +3,7 @@ class_name ConzolePlugin
 extends EditorPlugin
 
 const AUTOLOAD_NAME = "Conzole"
-const VERSION: String = "0.1"
+const VERSION: String = "0.2"
 
 const CONZOLE_WINDOW = preload("res://addons/conzole/conzole_window.tscn")
 
