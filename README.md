@@ -6,6 +6,7 @@ Conzole is a web browser console-inspired logger addon designed to make it easie
 Features include:
 * **Browser-console compatible(*) API:** Instantly familiar syntax for anyone used to web development. 
 * **Detailed object dumping:** When you want to inspect or look at a variable, log it to the Conzole for a detailed look at its properties
+* **Object parking log:** Add any objects to the watch list for quick access to open it in the inspector
 * **Rich text formatting:** Format your log output with shortcut formatting options for bold or colorized output. Full BBCode supported.
 * **Grouped log output:** Extending the browser console grouping API with the ability to colorize and rename groups
 * **Log limits per group:** Restrict number of log lines per group so you only get the most recent entries. Super useful for long running tasks such as game loops or timers.
@@ -77,6 +78,12 @@ var msg = ConzoleFormattedText.message("test").bold().color(Color.BLUE)
 # of the `test_panel` variable in an expandable view
 var test_panel = PanelContainer.new()
 Conzole.log(["Test panel contents", test_panel])
+
+# Adds the test_panel object to the watch list
+Conzole.watch(test_panel)
+
+# Adds the test_panel object to the watch list with a custom label
+Conzole.watch(test_panel, "A panel to watch")
 
 # Logs the contents of the passed in dictionary in an expandable view
 Conzole.log({ "dictionary_key_1": "one", "dictionary_key_2": 1, "dictionary_key_3": false, "dictionary_key_4": ["one", "two", "three"], "dictionary_key_5": { "object_key_1": 1, "object_key_2": Vector2(1, 1) } })
