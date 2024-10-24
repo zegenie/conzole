@@ -43,32 +43,32 @@ After enabling the plugin you will find it in the `Conzole` tab at the bottom of
 ## Examples
 ```gdscript
 # Logs "Test" to the conzole output
-self.log("Test")
+Conzole.log("Test")
 
 # Logs the message "Grouped message" to the conzole output, inside a group named "Group 1"
-self.log("Grouped message", "Group 1")
+Conzole.log("Grouped message", "Group 1")
 
 # Logs the message "Sub-grouped message" to the conzole output, 
 # inside a group named "Group 1-1", inside the group "Group 1"
-self.group("Sub-grouped message", "Group 1/Group 1-1")
+Conzole.group("Sub-grouped message", "Group 1/Group 1-1")
 
 # Logs two messages to the conzole output
-self.log(["Message 1", "Message 2"])
+Conzole.log(["Message 1", "Message 2"])
 
 # Logs a warning (does not log to the main output log)
-self.warn("Test warning")
+Conzole.warn("Test warning")
 
 # Logs an error (does not log to the main output log)
-self.err("Test error")
+Conzole.err("Test error")
 
 # Logs a message with level "debug"
-self.debug("Test debug message")
+Conzole.debug("Test debug message")
 
 # Logs a message with level "notice"
-self.notice("Test notice")
+Conzole.notice("Test notice")
 
 # Logs a message with level "verbose"
-self.verbose("Test verbose message")
+Conzole.verbose("Test verbose message")
 
 # Logs a blue, bold message to the conzole
 var msg = ConzoleFormattedText.message("test").bold().color(Color.BLUE)
@@ -76,37 +76,37 @@ var msg = ConzoleFormattedText.message("test").bold().color(Color.BLUE)
 # Logs the message "Test panel contents" and shows the contents 
 # of the `test_panel` variable in an expandable view
 var test_panel = PanelContainer.new()
-self.log(["Test panel contents", test_panel])
+Conzole.log(["Test panel contents", test_panel])
 
 # Logs the contents of the passed in dictionary in an expandable view
-self.log({ "dictionary_key_1": "one", "dictionary_key_2": 1, "dictionary_key_3": false, "dictionary_key_4": ["one", "two", "three"], "dictionary_key_5": { "object_key_1": 1, "object_key_2": Vector2(1, 1) } })
+Conzole.log({ "dictionary_key_1": "one", "dictionary_key_2": 1, "dictionary_key_3": false, "dictionary_key_4": ["one", "two", "three"], "dictionary_key_5": { "object_key_1": 1, "object_key_2": Vector2(1, 1) } })
 
 # Starts a timer
-self.time("My timer")
+Conzole.time("My timer")
 
 # Logs the time
 await get_tree().create_timer(.26).timeout
-self.timeLog("My timer")
+Conzole.timeLog("My timer")
 
 # Stops the timer
-self.timeEnd("My timer")
+Conzole.timeEnd("My timer")
 
 # Starts a counter and counts, including printing the current value
-self.count("My first counter")
-self.count("My second counter")
-self.count("My first counter")
-self.count("My first counter")
-self.count("My second counter")
-self.count("My second counter")
+Conzole.count("My first counter")
+Conzole.count("My second counter")
+Conzole.count("My first counter")
+Conzole.count("My first counter")
+Conzole.count("My second counter")
+Conzole.count("My second counter")
 
 # Resets the counter for a specific counter
-self.countReset("bob")
+Conzole.countReset("bob")
 
 # Prints an error to the conzole if the first parameter evaluates to false
 # Using either string substition and a list of parameters to substitute
-self.assertion(false, "%s failed", ["test"])
+Conzole.assertion(false, "%s failed", ["test"])
 # or an object that will be shown in an expandable view
-self.assertion(false, {"error": "test failed"})
+Conzole.assertion(false, {"error": "test failed"})
 ```
 
 For more examples and explanation on how these methods can be used, see the
