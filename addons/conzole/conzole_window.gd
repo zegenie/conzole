@@ -51,6 +51,7 @@ var _is_booted := false
 var _has_warned := false
 var _timers = {}
 var _counters = {}
+var _watched_objects = []
 var _parking_lot_group: ConzoleGroup
 
 func _ready() -> void:
@@ -161,6 +162,9 @@ func _get_active_group() -> ConzoleGroup:
 	return _active_group.back()
 
 func watch(remote_object_id: int, remote_object_type: String, label: String = ''):
+	if _watched_objects.has(remote_object_id):
+		return
+	
 	var key_value_item = ConzoleKeyValueItem.CONZOLE_KEY_VALUE_ITEM.instantiate() as ConzoleKeyValueItem
 	key_value_item._value = { "_conzole_remote_object_id": remote_object_id }
 	key_value_item._is_watched = true
@@ -170,6 +174,7 @@ func watch(remote_object_id: int, remote_object_type: String, label: String = ''
 	else:
 		key_value_item._key = '%s<%s>' % [remote_object_type, remote_object_id]
 	_parking_lot_group.children_container.add_child(key_value_item)
+	_watched_objects.append(remote_object_id)
 
 func group(key: String = 'default', options: Dictionary = {}) -> ConzoleGroup:
 	#if !_is_booted:

@@ -114,7 +114,7 @@ func clear(include_groups := true):
 	for child in children_container.get_children():
 		if child is ConzoleGroup && include_groups:
 			children_container.remove_child(child)
-		elif child is ConzoleLogItem:
+		elif child is ConzoleLogItem || child is ConzoleKeyValueItem:
 			children_container.remove_child(child)
 
 func group(key: String = 'default', options: Dictionary = {}, set_active := true) -> ConzoleGroup:
@@ -142,6 +142,8 @@ func group(key: String = 'default', options: Dictionary = {}, set_active := true
 		_group.set_color(options.color)
 	if options.has("pinned"):
 		_group.set_pinned()
+	if options.has("max_lines"):
+		_group.set_max_lines(options.max_lines)
 	
 	if group_keys.size() > 1:
 		return _group.group(group_keys[1], options)
