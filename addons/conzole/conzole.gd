@@ -1,7 +1,16 @@
 @tool
-
 class_name ConzoleInstance
 extends Node
+## Conzole developer console, inspired by the browser developer console
+##
+## Allows rich logging output with support for grouping, formatting and
+## variable watching. 
+## 
+## [b]Important:[/b] This class is referenced using the global autoloaded singleton [code]Conzole[/code]
+## Internally, these are in the [ConzoleInstance] class, but when used in your code you should
+## always use the [code]Conzole[/code] class name.
+##
+## @tutorial: https://github.com/zegenie/conzole/blob/master/README.md
 
 var _log_window_scene: ConzoleWindow
 var _base_group: ConzoleGroup
@@ -18,30 +27,12 @@ func _ready() -> void:
     if OS.is_debug_build():
         enable()
 
+## Flags the plugin as enabled. Automatically triggered if a debug build is detected
 func enable():
-    #if _log_window_scene is ConzoleWindow:
-        #return
-    #
-    #_log_window_scene = CONZOLE_WINDOW.instantiate() as ConzoleWindow
-    #_log_window_scene.filters_updated.connect(_update_filters)
-    #_log_window_scene.clear_log.connect(_clear_log)
-    #get_viewport().set_embedding_subwindows(false)
-    #get_tree().root.add_child.call_deferred(_log_window_scene)
     call_deferred("_boot")
-
-func _clear_log():
-    _base_group.clear()
-
-func _update_filters():
-    _base_group.filter(_log_window_scene._settings[ConzoleWindow.SETTINGS.LOG_LEVELS], _log_window_scene.filter_value)
 
 func _boot():
     _is_booted = true
-
-func _print_warning_if_needed():
-    if !_has_warned:
-        print_rich("[color=#ffec99]Warning: trying to use Conzole without being enabled. This message will only show once.[/color]")
-        _has_warned = true
 
 func _get_dictionary_from_object(_msg: Object, _processed_objects = []) -> Dictionary:
     var dict = {}
@@ -74,7 +65,6 @@ func _log(msg, log_level: int = ConzolePlugin.LogLevel.INFO, group_key: String =
             if _msg is ConzoleFormattedText:
                 msgs.append(_msg.get_formatted_text())
             elif _msg is Object:
-                #EditorInterface.get_inspector().
                 msgs.append(_get_dictionary_from_object(_msg))
             else:
                 msgs.append(_msg)
@@ -84,65 +74,101 @@ func _log(msg, log_level: int = ConzolePlugin.LogLevel.INFO, group_key: String =
         msgs.append(msg)
 
     EngineDebugger.send_message("conzole:log", [{ "msg": msgs, "log_level": log_level, "group_key": group_key }])
-    #if !_is_booted:
-        #_print_warning_if_needed()
-        #return
-    #
-    #var _log_item = _get_active_group()._log(msg, log_level, group_key)
-    #await get_tree().process_frame
-    #_log_window_scene.scroll_to(_log_item)
 
+## Logs a message to the conzole window with loglevel [constant ConzolePlugin.LogLevel.MESSAGE]
+## [param [group_key]] Optional log group
 func log(msg, group_key: String = ''):
     self._log(msg, ConzolePlugin.LogLevel.MESSAGE, group_key)
 
+## Logs a message to the conzole window with loglevel [constant ConzolePlugin.LogLevel.INFO]
+## [param [group_key]] Optional log group
 func info(msg, group_key: String = ''):
     self._log(msg, ConzolePlugin.LogLevel.INFO, group_key)
 
+## Logs a message to the conzole window with loglevel [constant ConzolePlugin.LogLevel.WARNING]
+## [param [group_key]] Optional log group
 func warn(msg, group_key: String = ''):
     self._log(msg, ConzolePlugin.LogLevel.WARN, group_key)
 
+## Logs a message to the conzole window with loglevel [constant ConzolePlugin.LogLevel.DEBUG]
+## [param [group_key]] Optional log group
 func debug(msg, group_key: String = ''):
     self._log(msg, ConzolePlugin.LogLevel.DEBUG, group_key)
 
+## Logs a message to the conzole window with loglevel [constant ConzolePlugin.LogLevel.ERROR]
+## [param [group_key]] Optional log group
 func err(msg, group_key: String = ''):
     self._log(msg, ConzolePlugin.LogLevel.ERROR, group_key)
 
+## Logs a message to the conzole window with loglevel [constant ConzolePlugin.LogLevel.NOTICE]
+## [param [group_key]] Optional log group
 func notice(msg, group_key: String = ''):
     self._log(msg, ConzolePlugin.LogLevel.NOTICE, group_key)
 
+## Logs a message to the conzole window with loglevel [constant ConzolePlugin.LogLevel.VERBOSE]
+## [param [group_key]] Optional log group
 func verbose(msg, group_key: String = ''):
     self._log(msg, ConzolePlugin.LogLevel.VERBOSE, group_key)
 
+## Creates or updates a group with the path [param key], defaults to an empty group name
+## If no group key is specified, the current active group will be set to this new group.
+## With an active group, any log messages or new group calls will be added inside this group.
+##
+## To end an active group, use [method ConzoleInstance.groupEnd]
+##
+## [param [options]] Optional dictionary of options to pass
+## [param options.color] Set the group header color to any valid [Color]
+## [param options.pinned] If [code]true[/code], pins the group so it's not removed when the conzole is cleared
+## [param options.max_lines] Specify a max number of lines to show in this group
 func group(key: String = 'default', options: Dictionary = {}):
     EngineDebugger.send_message("conzole:group", [{ "key": key, "options": options }])
 
+## Ends the currently active group, or the group specified with the [param key] parameter
+## If you start a new group with the same key later, it will not reuse the old group
 func groupEnd(key: String = 'default'):
     EngineDebugger.send_message("conzole:groupEnd", [{ "key": key }])
 
+## Starts a timer that can be used to track elapsed time
+## [param [label]] Optional label identifying the timer, which can be re-used later
 func time(label: String = 'default'):
     EngineDebugger.send_message("conzole:time", [{ "label": label }])
 
+## Output the time elapsed since the start of the timer
+## [param [label]] Optional label identifying the timer, in case you have multiple timers
 func timeLog(label: String = 'default'):
     EngineDebugger.send_message("conzole:timeLog", [{ "label": label }])
 
+## Ends the timer and outputs the time elapsed
+## [param [label]] Optional label identifying the timer, in case you have multiple timers
 func timeEnd(label: String = 'default'):
     EngineDebugger.send_message("conzole:timeEnd", [{ "label": label }])
 
+## Print output if the first parameter evaluates to [code]true[/code]
+## [param output_1] This output can either be a string, or an object. If it's an object, its
+## content is logged if the assertion evaluates to [code]true[/code]
+## [param output_2] An array of string replacements to use if [param output_1] is a string
 func assertion(value: bool, output_1: Variant, output_2: Variant = null):
     if value:
         return
     
     EngineDebugger.send_message("conzole:assertion", [{ "output_1": output_1, "output_2": output_2 }])
 
+## Logs the number of times that calls to count() has been called
+## [param [label]] Optional label identifying the counter, to track multiple counters at the same time
 func count(label: String = 'default'):
     EngineDebugger.send_message("conzole:count", [{ "label": label }])
 
+## Resets the active counter (if no label is specified) or the counter specified by the [param label] parameter
+## [param [label]] Optional label identifying the counter, to track multiple counters at the same time
 func countReset(label: String = 'default'):
     EngineDebugger.send_message("conzole:countReset", [{ "label": label }])
 
+## Clears the conzole log output and any watched variables
 func clear():
     EngineDebugger.send_message("conzole:clear", [])
 
+## Watch a variable by placing it in the "Watched variables" section of the Conzole
+## [param [label]] Optional label identifying the variable
 func watch(obj: Object, label: String = ''):
     EngineDebugger.send_message("conzole:watch", [{ "_remote_object_id": obj.get_instance_id(), "_remote_object_type": obj.get_class() , "label": label }])
 
